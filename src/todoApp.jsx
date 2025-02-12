@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "./redux/actions/todoActions";
+import { addTodo } from "./redux/slices/todoSlice";
 import { Plus } from "lucide-react";
 
 
@@ -53,3 +53,7 @@ export const TodoApp = () => {
       </div>
     );
   };
+
+
+  // thunk, saga, -> all those data layer opertions
+  //  logger -> see all the console log.  
