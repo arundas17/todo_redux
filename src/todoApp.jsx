@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "./redux/slices/todoSlice";
+import { addTodo,deleteTodo } from "./redux/slices/todoSlice";
 import { Plus } from "lucide-react";
 
 
@@ -42,10 +42,16 @@ export const TodoApp = () => {
           </div>
   
           {/* Todo List */}
-          <div>
+          <div >
             {todos && todos.map((todo) => (
-              <div key={todo.id} className="bg-white p-4 rounded-lg shadow mb-2">
+              <div key={todo.id} className="bg-white p-4 rounded-lg shadow mb-2 flex justify-between">
                 {todo.text}
+
+                <div className="flex px-3">
+                  <button className="bg-red-400 flex px-3">-</button>
+                  <h1 className="text-xl mx-2">1</h1>
+                  <button className="bg-green-400 flex px-3">+</button>
+                </div>
               </div>
             ))}
           </div>
