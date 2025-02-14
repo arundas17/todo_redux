@@ -1,25 +1,3 @@
-// import { ADD_TODO } from "../actions/todoActions";
-
-// const initialState = {
-//     todos: [],
-//     // 
-//   };
-  
-//  export const todoReducer = (state = initialState, action) => {
-//     switch (action.type) {
-//       case ADD_TODO:
-//         return {
-//           ...state,
-//           todos: [...state.todos, { id: Date.now(), text: action.payload, completed: false }],
-//         };
-//       default:
-//         return state;
-//     }
-//   };
-
-
-// import { createStore } from "redux";
-// import { rootReducer } from "../reducers/combineReducer";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const todoSlice = createSlice({
@@ -33,13 +11,53 @@ export const todoSlice = createSlice({
               id: Date.now(),
               text: action.payload,
               completed: false,
-              quantity:1
+              value:1
             })        
   },
   deleteTodo: (state, action) => {
     state.todos = state.todos.filter((todo) => todo.id !== action.payload);
   },
+  toggleCompleteTodo: (state, action) => {
+    state.todos = state.todos.map((todo)=> 
+      {return(
+      (todo.id === action.payload) ?
+        {
+          ...todo,
+          completed:!todo.completed
+        }
+        :
+         {todo}
+      )
+      }
+    );
+  },
+  updateTodo:(state,action)=>{
+    console.log(action.payload)
+    state.todos = state.todos.map((todo) => 
+      (todo.id === action.payload.id) ?
+    { ...todo,
+      text:action.payload.updatedText
+    }:
+    todo
+    )
+  },
+  countIncrease :(state,action)=>{
+    state.todos = state.todos.map((todo)=>
+      (todo.id === action.payload) ?
+       {...todo,value:todo.value+1}
+       :
+       todo
+    )
+  },
+  countDecrease :(state,action)=>{
+    state.todos = state.todos.map((todo)=>
+      (todo.id === action.payload) ?
+       {...todo,value:todo.value-1}
+       :
+       todo
+    )
+  }
 },
 });
-export const {addTodo,deleteTodo} = todoSlice.actions;
+export const {addTodo,deleteTodo,toggleCompleteTodo,updateTodo,countDecrease,countIncrease} = todoSlice.actions;
 export default todoSlice.reducer
